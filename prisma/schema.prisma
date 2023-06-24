@@ -1,0 +1,64 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// model student {
+//   indexNumber String      @id @map("_id")
+//   studentName String     
+//   del_flg     Boolean     @default(false)
+//   createdAt   DateTime    @default(now())
+//   updatedAt   DateTime    @updatedAt
+//   programe    programes[]
+// }
+
+// model programes {
+//   id        String    @id @default(auto()) @map("_id") @db.ObjectId
+//   name      String    @unique
+//   student   student?  @relation(fields: [studentId], references: [indexNumber])
+//   studentId String?
+//   coursesId String?
+//   courses   courses[]
+// }
+
+// model courses {
+//   id        String     @id @default(auto()) @map("_id") @db.ObjectId
+//   name      String     @unique
+//   programes programes? @relation(fields: [programId], references: [id])
+//   programId String?    @db.ObjectId
+// }
+model Student {
+  indexNumber String    @id @map("_id")
+  studentName String
+  del_flg     Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  program     Program?
+}
+
+model Program {
+ id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  name       String    @unique
+  studentId  String?   @unique
+  student    Student?  @relation(fields: [studentId], references: [indexNumber])
+  courses    Course[]
+}
+
+model Course {
+id        String    @id @default(auto()) @map("_id") @db.ObjectId
+name       String    @unique
+program    Program?  @relation(fields: [programId], references: [id])
+programId  String     @db.ObjectId
+}
+
+
+
+
+
