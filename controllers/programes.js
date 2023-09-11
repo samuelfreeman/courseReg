@@ -5,7 +5,7 @@ const addPrograme = async (req, res, next) => {
   try {
     const data = req.body;
     console.log(data);
-    const programe = await prisma.programes.create({
+    const programe = await prisma.program.create({
       data,
     });
     console.log("works!");
@@ -21,7 +21,7 @@ const addPrograme = async (req, res, next) => {
 const getPrograme = async(req,res,next)=>{
 
 try {
-  const programs =await prisma.programes.findMany({
+  const programs =await prisma.program.findMany({
 include:{
  courses:true
 

@@ -4,9 +4,10 @@ const prisma = new PrismaClient();
 
 const addcourses = async (req, res, next) => {
   try {
+    
     const data = req.body;
     console.log(data);
-    const courses = await prisma.courses.create({
+    const courses = await prisma.course.create({
       data,
     });
     console.log("works!");
